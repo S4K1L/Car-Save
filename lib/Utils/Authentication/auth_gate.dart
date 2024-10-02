@@ -39,13 +39,13 @@ class AuthGate extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: Container(
+              child: SizedBox(
                 height: 100,
                 width: 100,
                 child: LiquidCircularProgressIndicator(
                   value: 0.25,
                   // Defaults to 0.5.
-                  valueColor: AlwaysStoppedAnimation(Colors.blue),
+                  valueColor: const AlwaysStoppedAnimation(Colors.blue),
                   // Defaults to the current Theme's accentColor.
                   backgroundColor: Colors.white,
                   // Defaults to the current Theme's backgroundColor.
@@ -53,7 +53,7 @@ class AuthGate extends StatelessWidget {
                   borderWidth: 5.0,
                   direction: Axis.vertical,
                   // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.vertical.
-                  center: Text("Loading..."),
+                  center: const Text("Loading..."),
                 ),
               ),
             ); // Show loading indicator
@@ -69,13 +69,13 @@ class AuthGate extends StatelessWidget {
                 if (fingerprintSnapshot.connectionState ==
                     ConnectionState.waiting) {
                   return Center(
-                    child: Container(
+                    child: SizedBox(
                       height: 100,
                       width: 100,
                       child: LiquidCircularProgressIndicator(
                         value: 0.25,
                         // Defaults to 0.5.
-                        valueColor: AlwaysStoppedAnimation(Colors.blue),
+                        valueColor: const AlwaysStoppedAnimation(Colors.blue),
                         // Defaults to the current Theme's accentColor.
                         backgroundColor: Colors.white,
                         // Defaults to the current Theme's backgroundColor.
@@ -83,7 +83,7 @@ class AuthGate extends StatelessWidget {
                         borderWidth: 5.0,
                         direction: Axis.vertical,
                         // The direction the liquid moves (Axis.vertical = bottom to top, Axis.horizontal = left to right). Defaults to Axis.vertical.
-                        center: Text("Loading..."),
+                        center: const Text("Loading..."),
                       ),
                     ),
                   ); // Show loading indicator

@@ -14,30 +14,22 @@ class FingerprintPage extends StatefulWidget {
 }
 
 class _FingerprintPageState extends State<FingerprintPage> {
-  bool isAvailable = false; // Initialize with default values
-  bool hasFingerprint = false;
+  late bool isAvailable;
+  late bool hasFingerprint;
+  checkAvailable() async {
+    isAvailable = await LocalAuthApi.hasBiometrics();
+    final biometrics = await LocalAuthApi.getBiometrics();
 
-  // Corrected: Proper async call and state management
-  Future<void> checkAvailable() async {
-    try {
-      final biometricsAvailable = await LocalAuthApi.hasBiometrics();
-      final biometrics = await LocalAuthApi.getBiometrics();
+    hasFingerprint = biometrics.contains(BiometricType.fingerprint);
 
-      setState(() {
-        isAvailable = biometricsAvailable;
-        hasFingerprint = biometrics.contains(BiometricType.fingerprint);
-      });
-    } catch (e) {
-      // Handle any error here, log or display an error message if necessary
-      print("Error checking biometrics: $e");
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // Call checkAvailable when the widget initializes
-    checkAvailable();
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        buildText('Biometrics', isAvailable),
+        buildText('Fingerprint', hasFingerprint),
+      ],
+    );
   }
 
   @override
@@ -47,96 +39,90 @@ class _FingerprintPageState extends State<FingerprintPage> {
       child: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height / 2.7,
+            height: MediaQuery.of(context).size.height/2.7,
             child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 70),
                   child: CircleAvatar(
-                    radius: 80,
-                    backgroundColor: Colors.white70,
-                    child: Image.asset(logo),
-                  ),
+                      radius: 80,
+                      backgroundColor: Colors.white70,
+                      child: Image.asset(logo)),
                 ),
                 Text(
                   "Login with your",
                   style: TextStyle(
-                    fontSize: 29,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black.withOpacity(0.8),
-                  ),
+                      fontSize: 29,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black.withOpacity(0.8)),
                 ),
                 Text(
                   "Fingerprint",
                   style: TextStyle(
-                    fontSize: 29,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black.withOpacity(0.8),
-                  ),
+                      fontSize: 29,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black.withOpacity(0.8)),
                 ),
               ],
             ),
           ),
           Container(
             decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 10,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-              color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(35),
-                topLeft: Radius.circular(35),
-              ),
-              border: Border.all(color: Colors.transparent),
-            ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 10,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+                color: Colors.white,
+                borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(35), topLeft: Radius.circular(35)),
+                border: Border.all(color: Colors.transparent)),
             child: Padding(
               padding: const EdgeInsets.all(32),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.01,
                   ),
                   Text(
-                    "Let us know it's you by one-click authentication",
+                    "Let us know it's you by one click authentication",
                     style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.grey.withOpacity(0.8),
-                    ),
+                        fontSize: 19,
+                        fontWeight: FontWeight.w300,
+                        color: Colors.grey.withOpacity(0.8)),
                   ),
                   LottieBuilder.asset(
                     "assets/fin.json",
                     repeat: true,
                   ),
-                  // Use FutureBuilder to handle async call results
                   FutureBuilder(
-                    future: checkAvailable(), // Future to be resolved
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator(
-                          color: Colors.green,
-                          strokeWidth: 2,
-                        );
-                      } else {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            buildText('Fingerprint Availability', hasFingerprint),
-                            authenticateButton(context), // Add your authentication button logic here
-                          ],
-                        );
-                      }
-                    },
-                  ),
+                      future: checkAvailable(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const CircularProgressIndicator(
+                            color: Colors.green,
+                            strokeWidth: 2,
+                          );
+                        } else {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // buildText('Biometrics Hardware  ', isAvailable),
+                              buildText(
+                                  'Fingerprint Availability ', hasFingerprint),
+                              authenticateButton(context)
+                            ],
+                          );
+                        }
+                      })
                 ],
               ),
             ),

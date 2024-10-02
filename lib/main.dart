@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       // Use Obx to reactively listen to theme changes
       theme: themeController.isDarkTheme.value ? darkTheme : lightTheme,
       // AuthGate for authentication logic
-      home: const AuthGate(),
+      home: LoginPage(),
       // Define initial route
       initialRoute: RoutesPath.initialization,
       // GetX pages
