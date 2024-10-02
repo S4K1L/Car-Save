@@ -1,4 +1,5 @@
 import 'package:carsave/Controller/theme_controller.dart';
+import 'package:carsave/Utils/Authentication/auth_gate.dart';
 import 'package:carsave/Utils/colors.dart';
 import 'package:carsave/View/Login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,9 +32,9 @@ class MyApp extends StatelessWidget {
       // Use Obx to reactively listen to theme changes
       theme: themeController.isDarkTheme.value ? darkTheme : lightTheme,
       // AuthGate for authentication logic
-      home: LoginPage(),
+      home: const AuthGate(),
       // Define initial route
-      initialRoute: RoutesPath.login,
+      initialRoute: RoutesPath.initialization,
       // GetX pages
       getPages: pages,
     );
