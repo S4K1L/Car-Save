@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "255234684675",
+    "project_id": "carsave-61b20",
+    "storage_bucket": "carsave-61b20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255234684675:android:fa72bc6bb6ccc2bc441b36",
+        "android_client_info": {
+          "package_name": "com.example.carsave"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzVYR6r-Q7sdH20HKl9rWRlQS-jbvleYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
