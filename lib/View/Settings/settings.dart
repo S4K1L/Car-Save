@@ -79,7 +79,7 @@ class SettingPage extends StatelessWidget {
                     onPressed: (){
                       Get.to(()=> PrivacyAndPolicyPage(),transition: Transition.rightToLeft);
                     },
-                    child: Text('Privacy Police',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),)),
+                    child: Text('Privacy Policy',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),)),
                 TextButton(
                     onPressed: (){
                       Get.toNamed(RoutesPath.termPage);

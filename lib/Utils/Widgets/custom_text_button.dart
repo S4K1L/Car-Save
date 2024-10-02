@@ -11,14 +11,19 @@ class CustomTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width to scale the font size
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    // Scale factor for font size, adjust as needed
+    double fontSizeScale = screenWidth / 375;
     return Padding(
       padding: const EdgeInsets.only(top: 80),
       child: GestureDetector(
         onTap: onPress,
         child: Text(
           title,
-          style: const TextStyle(
-            fontSize: 20,
+          style: TextStyle(
+            fontSize: 20*fontSizeScale,
             color: kRedColor,
             decoration: TextDecoration.underline,
           ),

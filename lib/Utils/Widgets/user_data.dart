@@ -13,18 +13,23 @@ class UserData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width to scale the font size
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    // Scale factor for font size, adjust as needed
+    double fontSizeScale = screenWidth / 375;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           dataController.userModel.value.profileImage != null
-              ? ProfileImagePicker()
+              ? const ProfileImagePicker()
               : CircleAvatar(
-            radius: 45,
-            child: Icon(Icons.person, size: 40),
+            radius: 40*fontSizeScale,
+            child: Icon(Icons.person, size: 40*fontSizeScale),
           ),
-          SizedBox(width: 30),
+          const SizedBox(width: 30),
           Obx(
                 () => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,14 +38,14 @@ class UserData extends StatelessWidget {
                   dataController.userModel.value.name ?? 'Loading',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 24,
+                    fontSize: 18*fontSizeScale,
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
                 Text(
                   dataController.userModel.value.phone ?? 'Loading',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 16*fontSizeScale,
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).primaryColor,
                   ),

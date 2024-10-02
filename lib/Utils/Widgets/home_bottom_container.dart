@@ -22,21 +22,24 @@ class _HomeBottomContainerState extends State<HomeBottomContainer> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    // Scale factor for font size, adjust as needed
+    double fontSizeScale = screenWidth / 375;
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: EdgeInsets.only(top: 40* fontSizeScale),
       child: Column(
         children: [
           Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 120),
-                child: Container(
+                padding: EdgeInsets.only(right: 120*fontSizeScale),
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width / 1.3,
-                        padding: EdgeInsets.all(20),
+                        width: MediaQuery.of(context).size.width,
+                        padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           color: kBoxColor,
                           borderRadius: BorderRadius.circular(15),
@@ -48,19 +51,19 @@ class _HomeBottomContainerState extends State<HomeBottomContainer> {
                               'SAVINGS',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 28,
+                                fontSize: 28 * fontSizeScale,
                                 color: Theme.of(context).primaryColor
                               ),
                             ),
                             Text(
                               'Smart Saving is on',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 20* fontSizeScale,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).primaryColor
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             // Using Obx for reactive data update
                             Obx(() => Skeletonizer(
                                   enabled: dataController.isLoading.value,
@@ -68,7 +71,7 @@ class _HomeBottomContainerState extends State<HomeBottomContainer> {
                                   child: Text(
                                     'RM ${dataController.userModel.value.balance ?? 0}',
                                     style: TextStyle(
-                                      fontSize: 45,
+                                      fontSize: 45* fontSizeScale,
                                       fontWeight: FontWeight.bold,
                                       color: Theme.of(context).primaryColor
                                     ),
@@ -82,11 +85,11 @@ class _HomeBottomContainerState extends State<HomeBottomContainer> {
                 ),
               ),
               Positioned(
-                right: 80,
-                top: 60,
+                right: 80 * fontSizeScale,
+                top: 60 * fontSizeScale,
                 child: CircleAvatar(
                   backgroundColor: Theme.of(context).primaryColor,
-                  radius: 30,
+                  radius: 30 * fontSizeScale,
                   child: IconButton(
                     onPressed: () {
                       Get.to(() => SavingsPage(
@@ -101,26 +104,26 @@ class _HomeBottomContainerState extends State<HomeBottomContainer> {
                     icon: Icon(
                       Icons.add,
                       color: Theme.of(context).cardColor,
-                      size: 30,
+                      size: 30 * fontSizeScale,
                     ),
                   ),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           // Target Savings Container
           Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 100),
+                padding: EdgeInsets.only(left: 100*fontSizeScale),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width / 1.2,
-                        padding: EdgeInsets.all(20),
+                        width: MediaQuery.of(context).size.width,
+                        padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           color: kBoxColor,
                           borderRadius: BorderRadius.circular(15),
@@ -132,20 +135,20 @@ class _HomeBottomContainerState extends State<HomeBottomContainer> {
                               'TARGET SAVING',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 28,
+                                fontSize: 28 * fontSizeScale,
                                 color: Theme.of(context).primaryColor
                               ),
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text(
                               'Your Target Around the Corner',
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16* fontSizeScale,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).primaryColor
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             // Using Obx for reactive data update
                             Obx(() => Skeletonizer(
                                   enabled: dataController.isLoading.value,
@@ -153,7 +156,7 @@ class _HomeBottomContainerState extends State<HomeBottomContainer> {
                                   child: Text(
                                     'RM ${dataController.userModel.value.target ?? 0}',
                                     style: TextStyle(
-                                      fontSize: 45,
+                                      fontSize: 45* fontSizeScale,
                                       fontWeight: FontWeight.bold,
                                       color: Theme.of(context).primaryColor
                                     ),
@@ -167,11 +170,11 @@ class _HomeBottomContainerState extends State<HomeBottomContainer> {
                 ),
               ),
               Positioned(
-                left: 60,
-                top: 60,
+                left: 60* fontSizeScale,
+                top: 60 *fontSizeScale,
                 child: CircleAvatar(
                   backgroundColor: Theme.of(context).primaryColor,
-                  radius: 30,
+                  radius: 30*fontSizeScale,
                   child: IconButton(
                     onPressed: () {
                       // Add your onPressed logic for the check button
@@ -187,7 +190,7 @@ class _HomeBottomContainerState extends State<HomeBottomContainer> {
                     icon: Icon(
                       Icons.check,
                       color: Theme.of(context).cardColor,
-                      size: 30,
+                      size: 30*fontSizeScale,
                     ),
                   ),
                 ),

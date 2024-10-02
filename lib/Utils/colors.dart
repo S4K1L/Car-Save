@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Light Theme Colors
 const Color kBackgroundColor = Color(0xFFF5E7DA);
 const Color kBoxColor = Color(0xFFDABA94);
-const Color kRedColor = Color(0xFFB43939);
+const Color kRedColor = Color(0xFFD90F2B);
 const Color kBlackColor = Color(0xFF000000);
 const Color kWhiteColor = Color(0xFFFFFFFF);
 const Color kGrayColor = Color(0xFF9B9B9B);
@@ -21,15 +21,15 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: kBackgroundColor,
   primaryColor: kBlackColor,
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     bodyLarge: TextStyle(color: kBlackColor),
     bodyMedium: TextStyle(color: kBlackColor),
   ),
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     backgroundColor: kBoxColor,
     iconTheme: IconThemeData(color: kBlackColor),
   ),
-  colorScheme: ColorScheme.light(
+  colorScheme: const ColorScheme.light(
     primary: kBlackColor,
     surface: kBackgroundColor,
   ),
@@ -40,15 +40,15 @@ ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: darkBackgroundColor,
   primaryColor: kWhiteColor,
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     bodyLarge: TextStyle(color: darkWhiteColor),
     bodyMedium: TextStyle(color: darkWhiteColor),
   ),
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     backgroundColor: darkBoxColor,
     iconTheme: IconThemeData(color: darkWhiteColor),
   ),
-  colorScheme: ColorScheme.dark(
+  colorScheme: const ColorScheme.dark(
     primary: kWhiteColor,
     surface: darkBackgroundColor,
   ),

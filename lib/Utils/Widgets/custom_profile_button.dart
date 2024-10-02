@@ -15,6 +15,11 @@ class CustomProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width to scale the font size
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    // Scale factor for font size, adjust as needed
+    double fontSizeScale = screenWidth / 375;
     return GestureDetector(
       onTap: onPress,
       child: Row(
@@ -22,12 +27,12 @@ class CustomProfileButton extends StatelessWidget {
           Icon(
             icon,
             color: Theme.of(context).primaryColor,
-            size: 50,
+            size: 50*fontSizeScale,
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Text(
             title,
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),
+            style: TextStyle(fontSize: 26*fontSizeScale, fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),
           )
         ],
       ),
@@ -50,6 +55,11 @@ class CustomProfileIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width to scale the font size
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    // Scale factor for font size, adjust as needed
+    double fontSizeScale = screenWidth / 375;
     return GestureDetector(
       onTap: onPress,
       child: Row(
@@ -57,12 +67,12 @@ class CustomProfileIconButton extends StatelessWidget {
           Icon(
             icon,
             color: Theme.of(context).primaryColor,
-            size: 60,
+            size: 60*fontSizeScale,
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Text(
             title,
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor,),
+            style: TextStyle(fontSize: 26*fontSizeScale, fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor,),
           )
         ],
       ),
