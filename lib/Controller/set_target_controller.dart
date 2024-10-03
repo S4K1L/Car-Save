@@ -55,12 +55,14 @@ class SetTargetController extends GetxController {
 
         int newTargetAmount = existingTargetData['amount'] + targetAmount;
 
+        // Ensure totalSaving doesn't go below 0
+        int totalSaving = (userData['totalSaving'] ?? 0) + targetAmount;
+        totalSaving = totalSaving < 0 ? 0 : totalSaving;
+
         await existingTargetDoc.reference.update({
           'amount': newTargetAmount,
           'date': currentDate,
         });
-
-        int totalSaving = userData['totalSaving'] + targetAmount;
 
         await userDoc.update({
           'target': newTargetAmount,
@@ -78,8 +80,12 @@ class SetTargetController extends GetxController {
           'date': currentDate,
         });
 
-        int tempAmount = userData['balance'] - targetAmount;
-        int totalSaving = userData['totalSaving'] + targetAmount;
+        // Ensure balance and totalSaving don't go below 0
+        int tempAmount = (userData['balance'] ?? 0) - userData['target'];
+        tempAmount = tempAmount < 0 ? 0 : tempAmount;
+
+        int totalSaving = (userData['totalSaving'] ?? 0) + targetAmount;
+        totalSaving = totalSaving < 0 ? 0 : totalSaving;
 
         await userDoc.update({
           'target': targetAmount,
@@ -94,7 +100,6 @@ class SetTargetController extends GetxController {
       Get.snackbar("Error", e.toString());
     }
   }
-
 
   // Fetches and updates the completion status for each month
   Future<void> fetchTargetCompletionStatus() async {
@@ -123,7 +128,7 @@ class SetTargetController extends GetxController {
         // Iterate through the target documents and update the completion status
         targetSnapshot.docs.forEach((doc) {
           int targetAmount = doc['amount'];
-          int savedAmount = userSnapshot['balance']; // Assuming saved amount is stored as 'target' in the user data
+          int savedAmount = userSnapshot['balance'] ?? 0; // Assuming saved amount is stored as 'target' in the user data
           DateTime targetDate = (doc['date'] as Timestamp).toDate();
           int monthIndex = targetDate.month - 1; // Get the month (0-based index)
 
@@ -144,6 +149,4 @@ class SetTargetController extends GetxController {
       Get.snackbar("Error", e.toString());
     }
   }
-
-
 }
